@@ -1,1 +1,35 @@
-<h1>Here's your profile</h1>
+<nav>
+  <a href="/logout">LogOut</a>
+  <a href="/index">All Snippets</a>
+</nav>
+
+
+<h1>Here's your profile, {{username}} </h1>
+  <div class="containerTwo">
+    <form class="" action="/profile" method="post">
+      <input type="text" name="title" placeholder="Title" value="">
+      <textarea name="body" rows="8" cols="80" placeholder="Your Code Here"></textarea>
+      <input type="text" name="notes" placeholder="Optional Notes" value="">
+      <input type="text" name="language" placeholder="Language" value="">
+      <input type="text" name="tags" placeholder="Tags" value="">
+      <button type="submit" name="button">Submit</button>
+    </form>
+  </div>
+
+  {{#snippet}}
+  <div class="containerThree">
+
+    <h3>{{username}}'s Snippets</h3>
+    <a href="/single/{{id}}">{{title}}</a>
+    {{body}}
+    {{notes}}
+    {{#language}}
+    <a href="/language/{{.}}">{{.}}</a>
+    {{/language}}
+    <p class="tags">Tags: {{#tags}}<a href="/tags/{{.}}">{{.}}</a> {{/tags}}</p>
+
+    <a href="/delete">Delete</a>
+    <a href="/edit/{{id}}">Edit</a>
+
+</div>
+{{/snippet}}

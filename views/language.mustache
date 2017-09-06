@@ -1,0 +1,19 @@
+<nav>
+  <a href="/profile">Profile</a>
+  <a href="/logout">Logout</a>
+  <a href="/index">Index</a>
+</nav>
+<div class="containerFive">
+  {{#snippet}}
+  <h3>{{username}}</h3>
+  <h4>{{title}}</h4>
+  <p>Code: {{body}}</p>
+  <p>Notes: {{notes}}</p>
+  {{language}}
+  <p class="tags">Tags: {{#tags}}<a href="/tags/{{.}}">{{.}}</a> {{/tags}}</p>
+  {{#user}}
+    <a href="/delete">Delete</a>
+    <a href="/edit/{{id}}">Edit</a>
+  {{/user}}
+  {{/snippet}}
+</div>

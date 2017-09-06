@@ -1,12 +1,10 @@
-<form class="" action="index.html" method="post">
-  <input type="text" name="title" value="" placeholder="Title">
-  <input type="textarea" name="body" value="" placeholder="Your code">
-  <input type="textarea" name="notes" value="" placeholder="Notes">
-  <select class="language" name="">
-    <option value=""></option>
-  </select>
-  <input type="text" name="tags" value="" placehold>
+<form class="" action="/edit" method="post">
+  {{#snippet}}
+  <input type="text" name="title" placeholder="Title" value={{title}}>
+  <textarea name="body" rows="8" cols="80" placeholder="Your Code Here" value={{body}}></textarea>
+  <input type="text" name="notes" placeholder="Notes" value={{notes}}>
+  <input type="text" name="language" placeholder="Language" value={{language}}>
+  <input type="text" name="tags" placeholder="Tags" value={{tags}}>
+  <button type="submit" name="button">Submit Changes!</button>
+  {{/snippet}}
 </form>
-
-<code>
-</code>

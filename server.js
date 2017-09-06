@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mustacheExpress = require('mustache-express');
+const expressValidator = require('express-validator');
 const router = require('./routes/index');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -20,42 +21,42 @@ app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'mustache');
 app.set('layout', 'layout');
 
-app.use(bodyParser.urlencoded({extened: false}));
-// app.use(expressValidator());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(expressValidator());
 
 app.use(morgan('dev'));
 
-// passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//     User.authenticate(username, password, function(err, user) {
-//       if (err) {
-//         return done(err)
-//       }
-//       if (user) {
-//         return done(null, user)
-//       } else {
-//         return done(null, false, {
-//           message: "There is no user with that username and password."
-//         })
-//       }
-//     })
-//   }
-// ));
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.authenticate(username, password, function(err, user) {
+      if (err) {
+        return done(err)
+      }
+      if (user) {
+        return done(null, user)
+      } else {
+        return done(null, false, {
+          message: "There is no user with that username and password."
+        })
+      }
+    })
+  }
+));
 
-// passport.serializeUser(function(user, done) {
-//   done(null, user.id);
-// });
-//
-// passport.deserialzieUser(function(id, done) {
-//   User.findById(id, function(err, user) {
-//     done(err, user);
-//   });
-// });
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
 
-// app.use(function(req, res, next) {
-//   res.locals.user = req.user;
-//   next();
-// })
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+})
 
 app.use(session({
   secret: 'koolkat',
@@ -66,9 +67,9 @@ app.use(session({
   })
 }));
 
-// app.use(passport.intialize());
-// app.use(passport.session());
-// app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 app.use(router);
 
